@@ -5,8 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "yarn workspace ui start",
-    "dev": "yarn workspace ui dev"
+    "dev": "yarn workspace ui dev",
+    "start": "yarn workspace api start",
+    "build": "yarn workspace ui build"
   },
   "workspaces": [
     "api",
