@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "yarn workspace ui start",
+    "dev": "yarn workspace ui dev"
+  },
   "workspaces": [
     "api",
     "ui"

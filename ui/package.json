@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "parcel src/index.html --port $PORT",
     "dev": "parcel src/index.html"
   },
   "dependencies": {
