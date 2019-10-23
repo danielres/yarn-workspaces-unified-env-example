@@ -1,12 +1,12 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "src/server.js",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "dev": "nodemon --experimental-modules src/server.js",
+    "start": "node --experimental-modules src/server.js"
   },
   "dependencies": {
     "express": "^4.17.1"

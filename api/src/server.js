@@ -1,14 +1,12 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import path from "path";
 
 const app = express();
 const port = process.env.PORT || 3100;
+const UI = path.resolve("../ui/dist");
 
-const distDir = "../../ui/dist";
-app.use(express.static(path.join(__dirname, distDir)));
+app.use(express.static(UI));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, distDir, "index.html"));
-});
+app.get("*", (req, res) => res.sendFile(path.join(UI, "index.html")));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
