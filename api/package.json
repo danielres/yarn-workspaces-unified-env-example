@@ -9,7 +9,8 @@
     "start": "node --experimental-modules src/server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "graphql-yoga": "^1.18.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
