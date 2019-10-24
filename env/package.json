@@ -1,0 +1,11 @@
+{
+  "name": "env",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "envalid": "^5.0.0"
+  }
+}
