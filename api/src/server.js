@@ -29,13 +29,15 @@ server.express.get("*", (req, res, next) =>
 
 server.start(
   {
-    port: env.PORT,
+    port: env.API_PORT,
     endpoint: env.API_GRAPHQL_ENDPOINT,
     playground: env.API_GRAPHQL_ENDPOINT,
     subscriptions: env.API_GRAPHQL_ENDPOINT
   },
-  () =>
+  () => {
+    console.log(`[API] server:  http://localhost:${env.API_PORT}`);
     console.log(
-      `Server running on http://localhost:${env.PORT}${env.API_GRAPHQL_ENDPOINT}`
-    )
+      `[API] graphQL: http://localhost:${env.API_PORT}${env.API_GRAPHQL_ENDPOINT}`
+    );
+  }
 );
