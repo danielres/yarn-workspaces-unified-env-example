@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "parcel src/index.html",
+    "dev": "node -r esm devServer.js",
     "build": "parcel build src/index.html"
   },
   "dependencies": {
@@ -15,5 +15,9 @@
     "react-dom": "^16.11.0",
     "typescript": "^3.6.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "http-proxy-middleware": "^0.20.0",
+    "nodemon": "^1.19.4"
+  }
 }
