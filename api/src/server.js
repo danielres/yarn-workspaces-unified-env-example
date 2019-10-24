@@ -1,9 +1,7 @@
 import env from "env";
 import express from "express";
-import yoga from "graphql-yoga";
+import { GraphQLServer } from "graphql-yoga";
 import path from "path";
-
-const { GraphQLServer } = yoga;
 
 const UI_DIR = path.resolve("../ui/dist");
 

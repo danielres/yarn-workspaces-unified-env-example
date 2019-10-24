@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "nodemon --experimental-modules src/server.js",
-    "start": "node --experimental-modules src/server.js"
+    "dev": "nodemon -r esm src/server.js",
+    "start": "node -r esm src/server.js"
   },
   "dependencies": {
     "env": "1.0.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "graphql-yoga": "^1.18.3"
   },
