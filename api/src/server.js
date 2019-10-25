@@ -2,10 +2,11 @@ import env from "env";
 import express from "express";
 import { GraphQLServer } from "graphql-yoga";
 import path from "path";
+import authenticate from "./middlewares/authenticate";
 
 const UI_DIR = path.resolve("../ui/dist");
 
-const typeDefs = `
+const typeDefs = /* GraphQL */ `
   type Query {
     hello(name: String): String!
   }
@@ -17,7 +18,18 @@ const resolvers = {
   }
 };
 
-const server = new GraphQLServer({ typeDefs, resolvers, endpoint: "graphql" });
+const server = new GraphQLServer({
+  typeDefs,
+  resolvers,
+  endpoint: "graphql",
+  context: ctx => ctx,
+  middlewares: [
+    {
+      Query: authenticate
+      // Mutation: authenticate
+    }
+  ]
+});
 
 server.express.use(express.static(UI_DIR));
 
