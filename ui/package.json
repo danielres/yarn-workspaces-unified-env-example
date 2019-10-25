@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "env": "1.0.0",
+    "graphql": "^14.5.8",
     "parcel-bundler": "^1.12.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "urql": "^1.6.1"
   },
   "devDependencies": {
     "esm": "^3.2.25",
