@@ -1,29 +1,20 @@
 import { default as envalid, num, str } from "envalid";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import loadLocal from "./loadLocalEnv";
 
-if (!process.env.NODE_ENV) process.env.NODE_ENV = "development";
+const ENV = process.env.NODE_ENV || "development";
+loadLocal(ENV);
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const dotEnvFile = ["development", "test"].includes(process.env.NODE_ENV)
-  ? `.env.${process.env.NODE_ENV}.local`
-  : null;
-
-const env = envalid.cleanEnv(
+export default envalid.cleanEnv(
   process.env,
   {
     AUTH0_AUDIENCE: str(),
     AUTH0_DOMAIN: str(),
     AUTH0_ISSUER: str(),
     API_GRAPHQL_ENDPOINT: str({ default: "/graphql" }),
-    API_PORT: num({ default: process.env.PORT || 3100 }), // process.env.PORT is for Heroku
+    API_PORT: num({ default: parseInt(process.env.PORT) || 3100 }), // process.env.PORT is for Heroku
     UI_DEV_SERVER_PORT: num({ default: 1234 })
   },
   {
-    dotEnvPath: path.join(__dirname, dotEnvFile),
     strict: true
   }
 );
-
-export default env;

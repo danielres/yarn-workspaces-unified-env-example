@@ -1,0 +1,9 @@
+{
+  "SOME_ENV_VAR": "value for development and test",
+  "development": {
+    "SOME_DEV_ONLY_ENV_VAR": "value"
+  },
+  "test": {
+    "SOME_TEST_ONLY_ENV_VAR": "value"
+  }
+}
