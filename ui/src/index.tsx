@@ -1,11 +1,15 @@
+import "env";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider, createClient } from "urql";
-import env from "env";
+import { createClient, Provider } from "urql";
 import App from "./scenes/App";
 
+const config = {
+  endpoint: process.env.API_GRAPHQL_ENDPOINT
+};
+
 const client = createClient({
-  url: env.API_GRAPHQL_ENDPOINT
+  url: config.endpoint
 });
 
 ReactDOM.render(

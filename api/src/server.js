@@ -1,10 +1,14 @@
-import env from "env";
+import "env";
 import express from "express";
 import { GraphQLServer } from "graphql-yoga";
 import path from "path";
 import authenticate from "./middlewares/authenticate";
 
-const UI_DIR = path.resolve("../ui/dist");
+const config = {
+  port: process.env.API_PORT,
+  endpoint: process.env.API_GRAPHQL_ENDPOINT,
+  uiDir: path.resolve("../ui/dist")
+};
 
 const typeDefs = /* GraphQL */ `
   type Query {
@@ -31,25 +35,25 @@ const server = new GraphQLServer({
   ]
 });
 
-server.express.use(express.static(UI_DIR));
+server.express.use(express.static(config.uiDir));
 
 server.express.get("*", (req, res, next) =>
-  req.url === env.API_GRAPHQL_ENDPOINT
+  req.url === config.endpoint
     ? next()
-    : res.sendFile(`${UI_DIR}/index.html`)
+    : res.sendFile(`${config.uiDir}/index.html`)
 );
 
 server.start(
   {
-    port: env.API_PORT,
-    endpoint: env.API_GRAPHQL_ENDPOINT,
-    playground: env.API_GRAPHQL_ENDPOINT,
-    subscriptions: env.API_GRAPHQL_ENDPOINT
+    port: config.port,
+    endpoint: config.endpoint,
+    playground: config.endpoint,
+    subscriptions: config.endpoint
   },
   () => {
-    console.log(`[API] server:  http://localhost:${env.API_PORT}`);
+    console.log(`[API] server:  http://localhost:${config.port}`);
     console.log(
-      `[API] graphQL: http://localhost:${env.API_PORT}${env.API_GRAPHQL_ENDPOINT}`
+      `[API] graphQL: http://localhost:${config.port}${config.endpoint}`
     );
   }
 );
