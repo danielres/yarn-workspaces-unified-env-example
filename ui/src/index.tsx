@@ -1,23 +1,14 @@
 import "core-js/stable";
-import "regenerator-runtime/runtime";
 import "env";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { createClient, Provider } from "urql";
+import "regenerator-runtime/runtime";
 import App from "./scenes/App";
-
-const config = {
-  endpoint: process.env.API_GRAPHQL_ENDPOINT
-};
-
-const client = createClient({
-  url: config.endpoint
-});
+import { Providers } from "./services";
 
 ReactDOM.render(
-  <Provider value={client}>
+  <Providers>
     <App />
-  </Provider>,
-
+  </Providers>,
   document.getElementById("root")
 );
