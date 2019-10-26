@@ -12,7 +12,10 @@
     "dev:api": "yarn workspace api dev",
     "dev:ui": "yarn workspace ui dev",
     "start": "yarn workspace api start",
-    "build": "yarn workspace ui build"
+    "prebuild": "run-s env:local:init env:validate",
+    "build": "yarn workspace ui build",
+    "env:local:init": "env/initLocal",
+    "env:validate": "node -r esm env"
   },
   "workspaces": [
     "api",

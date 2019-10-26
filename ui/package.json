@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "node -r esm devServer.js",
-    "build": "parcel build src/index.html"
+    "dev": "node -r esm -r ../env devServer.js",
+    "build": "node -r esm -r ../env build.js"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.3.2",

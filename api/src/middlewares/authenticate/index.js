@@ -1,11 +1,10 @@
-import env from "env";
 import getUserInfo from "./getUserInfo";
 import verify from "./verify";
 
 const config = {
-  audience: env.AUTH0_AUDIENCE,
-  domain: env.AUTH0_DOMAIN,
-  issuer: env.AUTH0_ISSUER
+  audience: process.env.AUTH0_AUDIENCE,
+  domain: process.env.AUTH0_DOMAIN,
+  issuer: process.env.AUTH0_ISSUER
 };
 
 export default async (resolve, parent, args, ctx, info) => {

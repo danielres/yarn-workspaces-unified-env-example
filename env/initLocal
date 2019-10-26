@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# this creates the file env/local.json with and empty json
+# (needed on hosted environments)
+
+if [[ ! -e env/local.json ]]; then
+    echo {} > env/local.json
+fi

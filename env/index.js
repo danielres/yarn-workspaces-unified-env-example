@@ -1,6 +1,16 @@
 import { default as envalid, num, str } from "envalid";
 import loadLocal from "./loadLocalEnv";
 
+// Example usages:
+//
+// to just validate env vars (ex: on prebuild):
+// $ node -r esm env
+//
+// to validate env vars + pass them to a script:
+// node -r esm -r env api/server.js
+// node -r esm -r env ui/build.js
+// node -r esm -r env ui/devServer.js
+
 const ENV = process.env.NODE_ENV || "development";
 loadLocal(ENV);
 

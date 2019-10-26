@@ -1,4 +1,3 @@
-import "env";
 import express from "express";
 import proxy from "http-proxy-middleware";
 import Bundler from "parcel-bundler";
