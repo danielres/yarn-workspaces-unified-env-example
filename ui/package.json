@@ -9,6 +9,7 @@
     "build": "parcel build src/index.html"
   },
   "dependencies": {
+    "core-js": "^3.3.4",
     "env": "1.0.0",
     "graphql": "^14.5.8",
     "parcel-bundler": "^1.12.4",

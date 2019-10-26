@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import "env";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
