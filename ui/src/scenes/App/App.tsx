@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useQuery } from "urql";
-import Navbar from "./Navbar";
 import { useAuth } from "../../services";
+import css from "./App.css";
+import Navbar from "./Navbar";
 
 const GET_HELLO = /* GraphQL */ `
   query getHello {
@@ -10,21 +11,21 @@ const GET_HELLO = /* GraphQL */ `
 `;
 
 export default () => {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div>
       <Navbar />
-      {isAuthenticated && <Main />}
+      <Main />
     </div>
   );
 };
 
 function Main() {
+  const { isAuthenticated } = useAuth();
   const [res] = useQuery({ query: GET_HELLO });
 
-  if (res.fetching) return <div>Loading...</div>;
-  if (res.error) return <div>"Oh no!"</div>;
+  if (!isAuthenticated) return null;
+  if (res.fetching) return null;
+  if (res.error) return <div>An error has occured, please try again.</div>;
 
-  return <div>GraphQL response: {res.data.hello}</div>;
+  return <div className={css.Main}>GraphQL response: {res.data.hello}</div>;
 }
