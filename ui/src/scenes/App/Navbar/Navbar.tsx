@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useAuth } from "../../services";
+import { useAuth } from "../../../services";
 import css from "./Navbar.css";
 
 export default function({ className }) {
