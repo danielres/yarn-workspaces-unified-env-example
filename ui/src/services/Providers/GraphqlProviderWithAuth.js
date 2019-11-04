@@ -16,12 +16,25 @@ export default ({ children }) => (
   <GraphqlProviderWithAuth>{children}</GraphqlProviderWithAuth>
 );
 
+const authenticate = () => {};
+
 function GraphqlProviderWithAuth({ children }) {
   const [accessToken, setAccessToken] = React.useState("");
-  const { getTokenSilently, loading } = useAuth();
-
+  const { getTokenSilently, loading, setIsAuthenticated } = useAuth();
   React.useEffect(() => {
-    if (!loading) getTokenSilently().then(setAccessToken);
+    if (!loading) {
+      if (process.env.NODE_ENV === "test") {
+        try {
+          const token = window.location.href
+            .split("access_token=")[1]
+            .split("&")[0];
+          setAccessToken(token);
+          setIsAuthenticated(true);
+        } catch (error) {}
+      } else {
+        getTokenSilently().then(setAccessToken);
+      }
+    }
   }, [loading]);
 
   if (loading) return null;

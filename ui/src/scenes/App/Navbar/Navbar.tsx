@@ -19,7 +19,9 @@ export default function({ className }) {
 
           {isAuthenticated && (
             <React.Fragment>
-              <button onClick={logoutWithRedirect}>Logout</button>
+              <button data-test-id="button-logout" onClick={logoutWithRedirect}>
+                Logout
+              </button>
               <Avatar user={user} />
             </React.Fragment>
           )}
@@ -30,6 +32,7 @@ export default function({ className }) {
 }
 
 function Avatar({ user }) {
+  if (!user) return null;
   return (
     <div className={css.Avatar}>
       <img alt="User picture" height={40} src={user.picture} width={40} />

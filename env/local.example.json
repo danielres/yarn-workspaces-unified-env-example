@@ -1,9 +1,18 @@
 {
   "SOME_ENV_VAR": "value for development and test",
   "development": {
-    "SOME_DEV_ONLY_ENV_VAR": "value"
+    "AUTH0_DOMAIN": "XXX",
+    "AUTH0_AUDIENCE": "XXX",
+    "AUTH0_ISSUER": "XXX",
+    "UI_AUTH0_CLIENT_ID": "XXX"
   },
   "test": {
-    "SOME_TEST_ONLY_ENV_VAR": "value"
+    "AUTH0_DOMAIN": "XXX",
+    "AUTH0_AUDIENCE": "XXX",
+    "AUTH0_ISSUER": "XXX",
+    "AUTH0_USERNAME": "XXX",
+    "AUTH0_PASSWORD": "XXX",
+    "UI_AUTH0_CLIENT_ID": "XXX",
+    "AUTH0_CLIENT_SECRET": "XXX"
   }
 }

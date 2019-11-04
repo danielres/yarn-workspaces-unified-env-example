@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "env": "1.0.0"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress open",
+    "test:headless": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^3.6.0"
+  }
+}

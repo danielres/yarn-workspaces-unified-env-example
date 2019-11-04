@@ -27,5 +27,9 @@ function Main() {
   if (res.fetching) return null;
   if (res.error) return <div>An error has occured, please try again.</div>;
 
-  return <div className={css.Main}>GraphQL response: {res.data.hello}</div>;
+  return (
+    <div data-test-id="main" className={css.Main}>
+      GraphQL response: {res.data.hello}
+    </div>
+  );
 }
