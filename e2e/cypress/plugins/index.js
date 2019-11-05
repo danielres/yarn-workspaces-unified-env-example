@@ -21,6 +21,7 @@ module.exports = (on, config) => {
     "AUTH0_ISSUER",
     "AUTH0_PASSWORD",
     "AUTH0_USERNAME",
+    "UI_DEV_SERVER_PORT",
     "UI_AUTH0_CLIENT_ID"
   ]);
 };

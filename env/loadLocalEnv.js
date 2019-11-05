@@ -1,11 +1,12 @@
 import local from "./local.json";
 
-export default ENV => {
-  if (!["development", "test"].includes(ENV)) return;
+export default NODE_ENV => {
+  if (!["development", "test"].includes(NODE_ENV)) return;
 
-  Object.entries(local[ENV]).map(([k, v]) => {
-    setEnv(k, v);
-  });
+  if (local[NODE_ENV])
+    Object.entries(local[NODE_ENV]).map(([k, v]) => {
+      setEnv(k, v);
+    });
 
   Object.entries(local).map(([k, v]) => {
     if (!["string", "number"].includes(typeof v)) return;

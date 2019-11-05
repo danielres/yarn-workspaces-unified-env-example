@@ -2,6 +2,9 @@ import express from "express";
 import proxy from "http-proxy-middleware";
 import Bundler from "parcel-bundler";
 
+const [, , ...args] = process.argv;
+const isCacheEnabled = args.includes("cache:true");
+
 const config = {
   devServerPort: process.env.UI_DEV_SERVER_PORT,
   endpoint: process.env.API_GRAPHQL_ENDPOINT,
@@ -9,7 +12,7 @@ const config = {
 };
 
 const bundler = new Bundler("src/index.html", {
-  cache: true,
+  cache: isCacheEnabled,
   autoInstall: false
 });
 
@@ -26,5 +29,7 @@ app.use(
 app.use(bundler.middleware());
 
 app.listen(config.devServerPort, () => {
-  console.log(`[UI] devServer: http://localhost:${config.devServerPort}`);
+  console.log(
+    `[UI:devServer] ${process.env.NODE_ENV} | ${args} | http://localhost:${config.devServerPort}`
+  );
 });

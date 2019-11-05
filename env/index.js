@@ -1,6 +1,3 @@
-import { default as envalid, num, str } from "envalid";
-import loadLocal from "./loadLocalEnv";
-
 // Example usages:
 //
 // to just validate env vars (ex: on prebuild):
@@ -11,23 +8,38 @@ import loadLocal from "./loadLocalEnv";
 // node -r esm -r env ui/build.js
 // node -r esm -r env ui/devServer.js
 
-const ENV = process.env.NODE_ENV || "development";
-loadLocal(ENV);
+import { default as envalid, num, str } from "envalid";
+import loadLocal from "./loadLocalEnv";
+
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const { NODE_ENV } = process.env;
+const isDev = NODE_ENV === "development";
+const isTest = NODE_ENV === "test";
+
+loadLocal(NODE_ENV);
+
 const env = envalid.cleanEnv(
   process.env,
   {
     AUTH0_AUDIENCE: str(),
     AUTH0_DOMAIN: str(),
     AUTH0_ISSUER: str(),
-    ...(process.env === "test" && {
+    API_GRAPHQL_ENDPOINT: str({ default: "/graphql" }),
+    API_PORT: num({
+      default: isDev ? 3100 : isTest ? 3101 : parseInt(process.env.PORT) // PORT provided by Heroku
+    }),
+    UI_AUTH0_CLIENT_ID: str({ description: "used by UI + e2e tests" }),
+
+    ...(isDev && {
+      UI_DEV_SERVER_PORT: num({ default: 1234 })
+    }),
+
+    ...(isTest && {
       AUTH0_CLIENT_SECRET: str(),
       AUTH0_PASSWORD: str(),
-      AUTH0_USERNAME: str()
-    }),
-    API_GRAPHQL_ENDPOINT: str({ default: "/graphql" }),
-    API_PORT: num({ default: parseInt(process.env.PORT) || 3100 }), // process.env.PORT is for Heroku
-    UI_AUTH0_CLIENT_ID: str({ description: "used by UI + e2e tests" }),
-    UI_DEV_SERVER_PORT: num({ default: 1234 })
+      AUTH0_USERNAME: str(),
+      UI_DEV_SERVER_PORT: num({ default: 1235 })
+    })
   },
   {
     strict: true
