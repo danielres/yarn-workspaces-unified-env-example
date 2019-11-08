@@ -9,8 +9,7 @@
     "build": "run-s css:build js:build",
     "css:dev": "yarn css:build -w",
     "css:build": "postcss src/**/*.pcss --base src --ext css -d src --config postcss",
-    "js:dev": "node -r esm -r ../env devServer.js cache:true",
-    "js:test": "node -r esm -r ../env devServer.js",
+    "js:dev": "node -r esm -r ../env devServer.js",
     "js:build": "node -r esm -r ../env build.js"
   },
   "dependencies": {
