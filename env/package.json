@@ -5,6 +5,10 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "scripts": {
+    "initLocal": "./initLocal",
+    "validate": "node -r esm ."
+  },
   "dependencies": {
     "envalid": "^5.0.0"
   }

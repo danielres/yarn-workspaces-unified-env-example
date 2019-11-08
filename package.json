@@ -8,18 +8,14 @@
     "node": "12.13.0"
   },
   "scripts": {
-    "dev": "run-p dev:api dev:ui",
-    "dev:api": "yarn workspace api dev",
-    "dev:ui": "yarn workspace ui dev",
-    "start": "yarn workspace api start",
-    "test": "run-s test:e2e:headless",
-    "test:start": "NODE_ENV=test yarn dev",
-    "test:e2e": "yarn workspace e2e test",
-    "test:e2e:headless": "yarn workspace e2e test:headless",
-    "prebuild": "run-s env:local:init env:validate",
-    "build": "yarn workspace ui build",
-    "env:local:init": "env/initLocal",
-    "env:validate": "node -r esm env"
+    "dev": "run-p 'api dev' 'ui dev'",
+    "start": "run-s 'api start'",
+    "test:once": "NODE_ENV=test run-p -r 'api dev' 'ui dev' 'e2e run'",
+    "build": "run-p 'env initLocal' 'env validate' 'ui build'",
+    "api": "yarn workspace api run",
+    "e2e": "yarn workspace e2e run",
+    "env": "yarn workspace env run",
+    "ui": "yarn workspace ui run"
   },
   "workspaces": [
     "api",
@@ -27,7 +23,7 @@
     "env",
     "e2e"
   ],
-  "devDependencies": {
+  "dependencies": {
     "npm-run-all": "^4.1.5"
   }
 }

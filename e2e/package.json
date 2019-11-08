@@ -8,8 +8,8 @@
     "env": "1.0.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress open",
-    "test:headless": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress run"
+    "open": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress open",
+    "run": "NODE_ENV=test node -r esm -r ../env node_modules/.bin/cypress run"
   },
   "devDependencies": {
     "cypress": "^3.6.0"

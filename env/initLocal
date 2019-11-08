@@ -4,5 +4,5 @@
 # (needed on hosted environments)
 
 if [[ ! -e env/local.json ]]; then
-    echo {} > env/local.json
+    echo {} > local.json
 fi
