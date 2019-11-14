@@ -6,10 +6,7 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
 });
 
 const plugins = [
-  require("postcss-import")(),
-  require("postcss-nested")(),
   require("tailwindcss")("postcss/tailwind.config.js"),
-  require("postcss-extend")(),
   purgecss,
   require("autoprefixer")
 ];
