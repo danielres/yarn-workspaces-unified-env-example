@@ -1,15 +1,25 @@
+#!/usr/bin/env node
+
 // Example usages:
 //
 // to just validate env vars (ex: on prebuild):
-// $ node -r esm env
+// $ ../env/verify
+// or:
+// & yarn workspace env verify
 //
-// to validate env vars + pass them to a script:
-// node -r esm -r env api/server.js
-// node -r esm -r env ui/build.js
-// node -r esm -r env ui/devServer.js
+// to validate env vars + pass them to an executable:
+// $ ../env/verify node script.js
+// $ ../env/verify docker-compose up
+//
+// to just print a specific env var:
+// $ ../env/verify printenv AUTH0_DOMAIN
 
-import { default as envalid, num, str } from "envalid";
-import loadLocal from "./loadLocalEnv";
+const { num, str } = require("envalid");
+const envalid = require("envalid");
+const loadLocal = require("./loadLocalEnv");
+const spawn = require("cross-spawn");
+
+const args = process.argv.slice(2);
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 const { NODE_ENV } = process.env;
@@ -47,3 +57,12 @@ const env = envalid.cleanEnv(
 );
 
 Object.entries(env).map(([k, v]) => (process.env[k] = v));
+
+if (!args[0]) {
+  // This will print only if not validation errors occur:
+  console.log("[ENV] All environment variables are valid.");
+} else {
+  spawn(args[0], args.slice(1), { stdio: "inherit" }).on("exit", exitCode =>
+    process.exit(exitCode)
+  );
+}

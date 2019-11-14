@@ -1,6 +1,18 @@
-import local from "./local.json";
+const LOCAL_ENV_PATH = "./local.json";
 
-export default NODE_ENV => {
+module.exports = NODE_ENV => {
+  let local;
+
+  try {
+    console.log(
+      `[ENV][loadLocal] Loading local environment from ${LOCAL_ENV_PATH}`
+    );
+    local = require(LOCAL_ENV_PATH);
+  } catch (error) {
+    console.log(`[ENV][loadLocal] No ${LOCAL_ENV_PATH} available.`);
+    return;
+  }
+
   if (!["development", "test"].includes(NODE_ENV)) return;
 
   if (local[NODE_ENV])

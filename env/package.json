@@ -1,15 +1,13 @@
 {
   "name": "env",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
-    "initLocal": "./initLocal",
-    "validate": "node -r esm ."
+    "verify": "./verify"
   },
   "dependencies": {
+    "cross-spawn": "^7.0.1",
     "envalid": "^5.0.0"
   }
 }

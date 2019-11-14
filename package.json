@@ -1,7 +1,6 @@
 {
   "name": "2019-10-23-fast-typescript-react",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -11,7 +10,7 @@
     "dev": "run-p 'api dev' 'ui dev'",
     "start": "run-s 'api start'",
     "test:once": "NODE_ENV=test run-p -r 'api dev' 'ui dev' 'e2e run'",
-    "build": "run-p 'env initLocal' 'env validate' 'ui build'",
+    "build": "run-p 'env verify' 'ui build'",
     "api": "yarn workspace api run",
     "e2e": "yarn workspace e2e run",
     "env": "yarn workspace env run",

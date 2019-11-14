@@ -1,4 +1,3 @@
-import "env";
 import express from "express";
 import { GraphQLServer } from "graphql-yoga";
 import path from "path";
