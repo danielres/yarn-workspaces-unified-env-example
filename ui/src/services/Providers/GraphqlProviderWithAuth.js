@@ -48,7 +48,12 @@ function GraphqlProviderWithAuth({ children }) {
 function getClient({ accessToken }) {
   return createClient({
     url: config.endpoint,
-    fetchOptions: { headers: { authorization: accessToken } },
+    fetchOptions: {
+      headers: {
+        authorization: accessToken,
+        currentWorkspace: localStorage.getItem("currentWorkspace")
+      }
+    },
     exchanges: [cacheExchange, dedupExchange, fetchExchange]
   });
 }

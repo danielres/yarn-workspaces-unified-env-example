@@ -1,7 +1,9 @@
+import { formatError } from "apollo-errors";
 import express from "express";
 import { GraphQLServer } from "graphql-yoga";
 import path from "path";
 import authenticate from "./middlewares/authenticate";
+import findTenant from "./middlewares/findTenant";
 
 const config = {
   port: process.env.API_PORT,
@@ -26,12 +28,7 @@ const server = new GraphQLServer({
   resolvers,
   endpoint: "graphql",
   context: ctx => ctx,
-  middlewares: [
-    {
-      Query: authenticate
-      // Mutation: authenticate
-    }
-  ]
+  middlewares: [authenticate, findTenant]
 });
 
 server.express.use(express.static(config.uiDir));
@@ -47,7 +44,8 @@ server.start(
     port: config.port,
     endpoint: config.endpoint,
     playground: config.endpoint,
-    subscriptions: config.endpoint
+    subscriptions: config.endpoint,
+    formatError
   },
   () => {
     console.log(`[API] server:  http://localhost:${config.port}`);

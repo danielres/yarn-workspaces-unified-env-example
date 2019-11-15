@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useAuth } from "../../services";
+import { useAuth } from "../services";
 
 const buttonBase = `py-2 px-4 rounded`;
 const css = {
   outer: `container mx-auto m-8 p-8 bg-white shadow-lg`,
   title: `text-lg mb-4`,
   row: `mb-4`,
+  message: `text-sm text-gray-700`,
   inputs: { text: `form-input w-full` },
   buttons: {
     primary: `${buttonBase} text-white bg-blue-500 hover:bg-blue-700`,
@@ -13,15 +14,22 @@ const css = {
   }
 };
 
-export default () => {
+export default ({ message = "" }) => {
   const { loginWithRedirect } = useAuth();
-  const [workspace, setWorkspace] = React.useState("");
+  const [workspace, setWorkspace] = React.useState("one");
+
+  const onSubmit = () => {
+    localStorage.setItem("currentWorkspace", workspace);
+    loginWithRedirect();
+  };
 
   return (
     <div className={css.outer}>
       <h1 className={css.title}>Please enter the name of the workspace</h1>
 
-      <form onSubmit={() => loginWithRedirect()}>
+      {message && <div className={`${css.row} ${css.message}`}>{message}</div>}
+
+      <form onSubmit={onSubmit}>
         <div className={css.row}>
           <div>
             <label htmlFor="workspace">

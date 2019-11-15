@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Auth0Provider, useAuth0 } from "../react-auth0-spa";
+import { Auth0Provider } from "../react-auth0-spa";
 
 const config = {
   domain: process.env.AUTH0_DOMAIN,
