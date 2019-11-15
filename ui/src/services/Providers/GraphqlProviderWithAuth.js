@@ -38,6 +38,7 @@ function GraphqlProviderWithAuth({ children }) {
   }, [loading]);
 
   if (loading) return null;
+  if (!accessToken) return null;
 
   const client = getClient({ accessToken });
 
