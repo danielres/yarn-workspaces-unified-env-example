@@ -7,18 +7,20 @@
     "node": "12.13.0"
   },
   "scripts": {
-    "dev": "run-p 'api dev' 'ui dev'",
+    "dev": "run-p 'db up' 'api dev' 'ui dev'",
     "start": "run-s 'api start'",
     "test:once": "NODE_ENV=test run-p -r 'api dev' 'ui dev' 'e2e run'",
     "build": "run-p 'env verify' 'ui build'",
     "api": "yarn workspace api run",
     "e2e": "yarn workspace e2e run",
     "env": "yarn workspace env run",
+    "db": "yarn workspace db run",
     "ui": "yarn workspace ui run"
   },
   "workspaces": [
     "api",
     "ui",
+    "db",
     "env",
     "e2e"
   ],
