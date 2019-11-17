@@ -1,9 +1,17 @@
 import * as React from "react";
+import { Router, View } from "react-navi";
 import { useQuery } from "urql";
 import Login from "../../components/Login";
+import SideMenu from "../../components/SideMenu";
+import routes from "../../routes";
+import { useAppState } from "../../services/Providers/AppStateProvider";
 import Navbar from "./Navbar";
 
-const css = { Main: `container mx-auto bg-white p-4` };
+const css = {
+  columns: `flex`,
+  left: `bg-white p-4 mr-4 flex-none w-40`,
+  right: `bg-white p-4 flex-grow`
+};
 
 const GET_HELLO = /* GraphQL */ `
   query getHello {
@@ -13,6 +21,7 @@ const GET_HELLO = /* GraphQL */ `
 
 export default () => {
   const [res] = useQuery({ query: GET_HELLO });
+  const { isSideMenuOpen } = useAppState();
 
   if (res.fetching) return null;
 
@@ -32,12 +41,21 @@ export default () => {
   }
 
   return (
-    <React.Fragment>
+    <Router routes={routes}>
       <Navbar />
 
-      <div data-test-id="main" className={css.Main}>
-        GraphQL response: {res.data.hello}
+      <div className={css.columns}>
+        {isSideMenuOpen && (
+          <div className={css.left}>
+            <SideMenu />
+          </div>
+        )}
+
+        <div data-test-id="main" className={css.right}>
+          <View />
+          GraphQL response: {res.data.hello}
+        </div>
       </div>
-    </React.Fragment>
+    </Router>
   );
 };
