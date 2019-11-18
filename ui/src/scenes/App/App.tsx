@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Router, View } from "react-navi";
+import { Router, useCurrentRoute, View } from "react-navi";
 import { useQuery } from "urql";
 import Login from "../../components/Login";
 import SideMenu from "../../components/SideMenu";
@@ -8,9 +8,8 @@ import { useAppState } from "../../services/Providers/AppStateProvider";
 import Navbar from "./Navbar";
 
 const css = {
-  columns: `flex`,
-  left: `bg-white p-4 mr-4 flex-none w-40`,
-  right: `bg-white p-4 flex-grow`
+  main: `bg-white p-4 grow mt-4`,
+  side: `bg-white p-4 absolute right-0 w-48 shadow-md Xh-full rounded-bl`
 };
 
 const GET_HELLO = /* GraphQL */ `
@@ -42,20 +41,29 @@ export default () => {
 
   return (
     <Router routes={routes}>
+      <RouterEffects />
+
       <Navbar />
-
-      <div className={css.columns}>
-        {isSideMenuOpen && (
-          <div className={css.left}>
-            <SideMenu />
-          </div>
-        )}
-
-        <div data-test-id="main" className={css.right}>
-          <View />
-          GraphQL response: {res.data.hello}
+      {isSideMenuOpen && (
+        <div className={css.side}>
+          <SideMenu />
         </div>
+      )}
+      <div data-test-id="main" className={css.main}>
+        <View />
+        GraphQL response: {res.data.hello}
       </div>
     </Router>
   );
 };
+
+function RouterEffects() {
+  const { closeSideMenu } = useAppState();
+  const { pathname } = useCurrentRoute().url;
+
+  React.useEffect(() => {
+    closeSideMenu();
+  }, [pathname]);
+
+  return null;
+}

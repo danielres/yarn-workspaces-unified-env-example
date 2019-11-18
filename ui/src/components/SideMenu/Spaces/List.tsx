@@ -19,7 +19,7 @@ export default () => {
   return (
     <ul>
       {spaces.map(space => (
-        <li className={css.item}>
+        <li className={css.item} key={space}>
           <button
             className={
               space === currentSpace ? css.buttons.current : css.buttons.normal

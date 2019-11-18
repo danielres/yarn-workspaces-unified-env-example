@@ -1,4 +1,6 @@
 module.exports = {
+  important: "#root",
+
   theme: {
     extend: {}
   },

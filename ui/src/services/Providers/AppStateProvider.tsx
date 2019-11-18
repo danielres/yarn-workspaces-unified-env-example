@@ -5,17 +5,22 @@ const AppStateContext = React.createContext();
 export const useAppState = () => React.useContext(AppStateContext);
 
 export default ({ children }) => {
-  const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(true);
-  const openSideMenu = () => setIsSideMenuOpen(true);
+  const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
+  const [sideMenuContent, setSideMenuContent] = React.useState(null);
   const closeSideMenu = () => setIsSideMenuOpen(false);
-  const toggleSideMenu = () => setIsSideMenuOpen(!isSideMenuOpen);
+  const toggleSideMenu = (content: "spaces" | "user" | null) => {
+    setSideMenuContent(content);
+    setIsSideMenuOpen(
+      sideMenuContent === content && isSideMenuOpen ? false : true
+    );
+  };
 
   return (
     <AppStateContext.Provider
       value={{
         closeSideMenu,
+        sideMenuContent,
         isSideMenuOpen,
-        openSideMenu,
         toggleSideMenu
       }}
     >

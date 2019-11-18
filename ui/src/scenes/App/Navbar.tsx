@@ -1,46 +1,51 @@
 import * as React from "react";
+import { FaCog } from "react-icons/fa";
 import { Link } from "react-navi";
-import { useAuth } from "../../services";
-import { useAppState } from "../../services/Providers/AppStateProvider";
+import { useAppState, useAuth } from "../../services";
 
 const css = {
-  outer: `mb-4 py-2 bg-blue-700 text-white`,
-  inner: `container mx-auto flex justify-between items-center px-4 sm:px-0`,
+  outer: `py-2 bg-blue-700 text-white`,
+  inner: `flex justify-between items-center px-4 `,
   left: { outer: ``, item: `mr-4` },
-  right: { outer: `flex`, item: `ml-4` },
-  links: { brand: `no-underline text-blue-300 hover:text-blue-100` },
-  Avatar: { img: `rounded-full border-4 border-blue-600` }
+  right: { outer: `flex`, item: `ml-2` },
+  links: { brand: `no-underline text-blue-300 hover:text-blue-100 ml-2` },
+  Avatar: {
+    img: `rounded-full border-4 border-blue-600 hover:border-blue-400`
+  },
+  icon: `text-blue-300 hover:text-blue-100 align-middle`,
+  button: `outline-none`
 };
 
 export default () => {
   const { user, logout } = useAuth();
   const { toggleSideMenu } = useAppState();
 
-  const logoutWithRedirect = () => logout({ returnTo: window.location.origin });
-
   return (
     <div className={css.outer}>
       <div className={css.inner}>
         <div className={css.left.outer}>
-          <Link className={`${css.left.item} ${css.links.brand}`} href="/">
-            Hola
-          </Link>
-          <button onClick={toggleSideMenu}>Settings</button>
+          <div className={css.left.item}>
+            <Link className={css.links.brand} href="/">
+              Hola
+            </Link>
+          </div>
         </div>
 
         <div className={css.right.outer}>
           <React.Fragment>
             <button
-              className={css.right.item}
-              data-test-id="button-logout"
-              onClick={logoutWithRedirect}
+              className={css.button}
+              onClick={() => toggleSideMenu("spaces")}
             >
-              Logout
+              <FaCog className={css.icon} />
             </button>
 
-            <Link href="/profile">
+            <button
+              className={css.button}
+              onClick={() => toggleSideMenu("user")}
+            >
               <Avatar className={css.right.item} user={user} />
-            </Link>
+            </button>
           </React.Fragment>
         </div>
       </div>
