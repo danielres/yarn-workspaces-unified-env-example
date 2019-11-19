@@ -6,7 +6,7 @@ exports.up = async knex => {
       t.uuid("id")
         .primary()
         .defaultTo(knex.raw("uuid_generate_v4()"));
-      t.uuid("addedBy").notNullable();
+      t.string("name").notNullable();
       t.timestamp("createdAt").defaultTo(knex.fn.now());
       t.timestamp("updatedAt");
     })

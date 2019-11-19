@@ -6,13 +6,13 @@ import Auth0Provider from "./Auth0Provider";
 import GraphqlProviderWithAuth from "./GraphqlProviderWithAuth";
 
 export default ({ children }) => (
-  <AppStateProvider>
-    <Auth0Provider>
-      <AuthGate>
-        <GraphqlProviderWithAuth>{children}</GraphqlProviderWithAuth>
-      </AuthGate>
-    </Auth0Provider>
-  </AppStateProvider>
+  <Auth0Provider>
+    <AuthGate>
+      <GraphqlProviderWithAuth>
+        <AppStateProvider>{children}</AppStateProvider>
+      </GraphqlProviderWithAuth>
+    </AuthGate>
+  </Auth0Provider>
 );
 
 function AuthGate({ children }) {

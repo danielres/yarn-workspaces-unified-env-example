@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useAppState } from "../../../services";
 
 const buttonBase = `px-2 py-1 mb-2 w-full text-left rounded font-semibold`;
 const css = {
@@ -9,23 +10,22 @@ const css = {
   }
 };
 
-const spaces = ["one", "two", "three"];
-
 export default () => {
   const currentSpace = localStorage.getItem("currentWorkspace");
+  const { user } = useAppState();
 
-  if (!spaces.length) return null;
+  if (user.fetching) return null;
 
   return (
     <ul>
-      {spaces.map(space => (
-        <li className={css.item} key={space}>
+      {user.data.user.spaces.map(({ name, id }) => (
+        <li className={css.item} key={id}>
           <button
             className={
-              space === currentSpace ? css.buttons.current : css.buttons.normal
+              name === currentSpace ? css.buttons.current : css.buttons.normal
             }
           >
-            {space}
+            {name}
           </button>
         </li>
       ))}

@@ -1,8 +1,23 @@
 import * as React from "react";
+import { useQuery } from "urql";
 
 const AppStateContext = React.createContext();
 
 export const useAppState = () => React.useContext(AppStateContext);
+
+const GET_USER = /* GraphQL */ `
+  query getUser {
+    user {
+      id
+      name
+      email
+      spaces {
+        id
+        name
+      }
+    }
+  }
+`;
 
 export default ({ children }) => {
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
@@ -15,13 +30,16 @@ export default ({ children }) => {
     );
   };
 
+  const [user] = useQuery({ query: GET_USER });
+
   return (
     <AppStateContext.Provider
       value={{
         closeSideMenu,
         sideMenuContent,
         isSideMenuOpen,
-        toggleSideMenu
+        toggleSideMenu,
+        user
       }}
     >
       {children}
