@@ -13,7 +13,8 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "graphql-yoga": "^1.18.3",
-    "jwks-rsa": "^1.6.0"
+    "jwks-rsa": "^1.6.0",
+    "node-cache": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

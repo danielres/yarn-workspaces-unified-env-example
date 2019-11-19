@@ -1,5 +1,8 @@
+import NodeCache from "node-cache";
 import getUserInfo from "./getUserInfo";
 import verify from "./verify";
+
+const userInfoCache = new NodeCache({ maxKeys: 100 });
 
 const config = {
   audience: process.env.AUTH0_AUDIENCE,
@@ -14,8 +17,14 @@ export default async (resolve, parent, args, ctx, info) => {
       ? ctx.request.headers.authorization
       : null;
   if (!accessToken) throw new Error(`Access token is missing`);
-  const user = await verify({ accessToken, audience, domain, issuer });
-  const userInfo = await getUserInfo({ accessToken, domain: config.domain });
-  ctx.user = userInfo;
+
+  if (!userInfoCache.get(accessToken)) {
+    const user = await verify({ accessToken, audience, domain, issuer });
+    const userInfo = await getUserInfo({ accessToken, domain: config.domain });
+    userInfoCache.set(accessToken, userInfo);
+  }
+
+  ctx.user = userInfoCache.get(accessToken);
+
   return resolve();
 };
