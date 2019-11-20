@@ -2,7 +2,6 @@ import { User } from "db/queries";
 
 export const typeDefs = /* GraphQL */ `
   type Query {
-    hello(name: String): String!
     user: User!
   }
   type Mutation {
@@ -26,7 +25,6 @@ export const typeDefs = /* GraphQL */ `
 
 export const resolvers = {
   Query: {
-    hello: (_, { name }) => `Hello ${name || "World"}`,
     user: (_, __, { user }) => user
   },
   User: {
