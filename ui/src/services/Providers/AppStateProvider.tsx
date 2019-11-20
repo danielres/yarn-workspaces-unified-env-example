@@ -32,6 +32,8 @@ export default ({ children }) => {
 
   const [user] = useQuery({ query: GET_USER });
 
+  if (user.fetching) return <div>Loading user data...</div>;
+
   return (
     <AppStateContext.Provider
       value={{

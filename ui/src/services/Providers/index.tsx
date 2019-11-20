@@ -18,7 +18,7 @@ export default ({ children }) => (
 function AuthGate({ children }) {
   const { isAuthenticated, loading } = useAuth0();
 
-  if (loading) return null;
+  if (loading) return "Authenticating...";
   if (isAuthenticated) return children;
 
   return <Login />;
