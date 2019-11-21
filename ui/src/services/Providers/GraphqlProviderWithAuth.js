@@ -50,8 +50,7 @@ function getClient({ accessToken }) {
     url: config.endpoint,
     fetchOptions: {
       headers: {
-        authorization: accessToken,
-        currentWorkspace: localStorage.getItem("currentWorkspace")
+        authorization: accessToken
       }
     },
     exchanges: [cacheExchange, dedupExchange, fetchExchange]

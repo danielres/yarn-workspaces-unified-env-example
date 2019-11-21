@@ -11,22 +11,13 @@ const css = {
 };
 
 export default () => {
-  const currentSpace = localStorage.getItem("currentWorkspace");
   const { user } = useAppState();
-
-  if (user.fetching) return null;
 
   return (
     <ul>
       {user.data.user.spaces.map(({ name, id }) => (
         <li className={css.item} key={id}>
-          <button
-            className={
-              name === currentSpace ? css.buttons.current : css.buttons.normal
-            }
-          >
-            {name}
-          </button>
+          <button className={css.buttons.normal}>{name}</button>
         </li>
       ))}
     </ul>
