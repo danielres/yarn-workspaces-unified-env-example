@@ -12,7 +12,9 @@
     "db": "1.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
     "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.6.0",
     "node-cache": "^5.0.2"
   },
