@@ -2,7 +2,7 @@ import { formatError } from "apollo-errors";
 import express from "express";
 import { GraphQLServer } from "graphql-yoga";
 import path from "path";
-import { authenticate, persistUser } from "./middlewares";
+import { authenticate, persistUser } from "./middlewares/express";
 import { resolvers, typeDefs } from "./schema";
 
 const config = {
@@ -15,11 +15,13 @@ const server = new GraphQLServer({
   typeDefs,
   resolvers,
   endpoint: "graphql",
-  context: ctx => ctx,
-  middlewares: [authenticate, persistUser]
+  context: ({ request, response, ...rest }) => ({ ...rest, user: request.user })
 });
 
-server.express.use(express.static(config.uiDir));
+server.express
+  .use(authenticate)
+  .use(persistUser)
+  .use(express.static(config.uiDir));
 
 server.express.get("*", (req, res, next) =>
   req.url === config.endpoint
