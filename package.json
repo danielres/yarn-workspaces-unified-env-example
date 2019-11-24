@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "run-p 'db up' 'api dev' 'ui dev'",
     "start": "run-s 'api start'",
-    "test:once": "NODE_ENV=test run-p -r 'api dev' 'ui dev' 'e2e run'",
+    "test:once": "run-s 'test:db:once' 'test:e2e:once'",
+    "test:db:once": "yarn db test:once",
+    "test:e2e:once": "NODE_ENV=test run-p -r 'api dev' 'ui dev' 'e2e run'",
     "build": "run-p 'env verify' 'ui build'",
     "api": "yarn workspace api run",
     "e2e": "yarn workspace e2e run",
