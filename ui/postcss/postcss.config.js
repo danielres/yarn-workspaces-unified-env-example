@@ -7,7 +7,7 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
 
 const plugins = [
   require("tailwindcss")("postcss/tailwind.config.js"),
-  purgecss,
+  ...(process.env.NODE_ENV === "development" ? [] : [purgecss]),
   require("autoprefixer")
 ];
 
