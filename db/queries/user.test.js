@@ -28,6 +28,22 @@ test("User.createTenant", async t => {
   t.end();
 });
 
+test("User.getTenant", async t => {
+  await cleanDb();
+  const { alice } = samples;
+  const dbAlice = await User.create(alice);
+  const t1 = await User.createTenant(dbAlice, { name: "aTenant1" });
+  const t2 = await User.createTenant(dbAlice, { name: "aTenant2" });
+
+  const aT1 = await User.getTenant(dbAlice, t1.shortId);
+  const aT2 = await User.getTenant(dbAlice, t2.shortId);
+
+  t.deepEqual(aT1.name, "aTenant1");
+  t.deepEqual(aT2.name, "aTenant2");
+
+  t.end();
+});
+
 test("User.getTenants", async t => {
   await cleanDb();
   const { alice, bob } = samples;

@@ -9,6 +9,7 @@ export const typeDefs = /* GraphQL */ `
   }
   type Tenant {
     id: ID!
+    shortId: String!
     name: String!
     createdAt: String!
     updatedAt: String

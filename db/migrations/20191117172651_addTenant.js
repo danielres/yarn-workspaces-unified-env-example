@@ -7,8 +7,12 @@ exports.up = async knex => {
         .primary()
         .defaultTo(knex.raw("uuid_generate_v4()"));
       t.string("name").notNullable();
+      t.string("shortId")
+        .unique()
+        .notNullable();
       t.timestamp("createdAt").defaultTo(knex.fn.now());
       t.timestamp("updatedAt");
+      t.index(["shortId"]);
     })
     .then(() => knex.schema.raw(onUpdateTrigger("Tenant")));
 };

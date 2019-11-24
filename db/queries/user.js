@@ -1,4 +1,15 @@
+const shortid = require("shortid");
 const { knex } = require("../index");
+
+const getTenants = ({ id }) =>
+  knex("Tenant")
+    .select(
+      "Tenant.*",
+      "TenantUserRelation.type",
+      "TenantUserRelation.createdAt as joinedAt"
+    )
+    .leftJoin("TenantUserRelation", "Tenant.id", "TenantUserRelation.tenantId")
+    .where("TenantUserRelation.userId", id);
 
 module.exports = {
   create: async args =>
@@ -13,26 +24,20 @@ module.exports = {
       .where("sub", sub)
       .first(),
 
-  getTenants: ({ id }) =>
-    knex("Tenant")
-      .select(
-        "Tenant.*",
-        "TenantUserRelation.type",
-        "TenantUserRelation.createdAt as joinedAt"
-      )
-      .leftJoin(
-        "TenantUserRelation",
-        "Tenant.id",
-        "TenantUserRelation.tenantId"
-      )
-      .where("TenantUserRelation.userId", id),
+  getTenants: getTenants,
+
+  getTenant: ({ id }, shortId) =>
+    getTenants({ id })
+      .andWhere("Tenant.shortId", shortId)
+      .first(),
 
   createTenant: (user, args) => {
+    const shortId = shortid.generate();
     return knex.transaction(async tx => {
       const tenant = (
         await knex("Tenant")
           .transacting(tx)
-          .insert(args)
+          .insert({ ...args, shortId })
           .returning("*")
       )[0];
       const relation = await knex("TenantUserRelation")
