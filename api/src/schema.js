@@ -14,6 +14,7 @@ export const typeDefs = /* GraphQL */ `
     name: String!
     owner: User!
     users: [User!]!
+    joinedAt: String!
     createdAt: String!
     updatedAt: String
   }

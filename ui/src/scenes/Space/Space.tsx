@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useQuery } from "urql";
+import { formatDate } from "../../helpers/dates";
 
 const css = {
   title: `text-xl`,
@@ -13,6 +14,7 @@ const GET_SPACE = /* GraphQL */ `
       shortId
       name
       createdAt
+      joinedAt
       owner {
         id
         name
@@ -42,7 +44,8 @@ export default ({ shortId }) => {
     <div>
       <h1 className={css.title}>{space.name}</h1>
       <p className={css.p} title={space.owner.email}>
-        owner: {space.owner.name}
+        owner: {space.owner.name} | created: {formatDate(space.createdAt)} |
+        joined: {formatDate(space.joinedAt)}
       </p>
       <p className={css.p}>
         users:
