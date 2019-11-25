@@ -13,6 +13,7 @@ const GET_USER = /* GraphQL */ `
       email
       spaces {
         id
+        shortId
         name
       }
     }

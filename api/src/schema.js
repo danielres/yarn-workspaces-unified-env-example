@@ -3,6 +3,7 @@ import { Tenant, User } from "db/queries";
 export const typeDefs = /* GraphQL */ `
   type Query {
     user: User!
+    space(shortId: String!): Tenant!
   }
   type Mutation {
     addTenant(name: String): Tenant!
@@ -28,7 +29,8 @@ export const typeDefs = /* GraphQL */ `
 
 export const resolvers = {
   Query: {
-    user: (_, __, { user }) => user
+    user: (_, __, { user }) => user,
+    space: (_, { shortId }, { user }) => User.getTenant(user, shortId)
   },
   User: {
     spaces: (_, __, { user }) => User.getTenants(user)
