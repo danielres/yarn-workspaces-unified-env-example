@@ -3,8 +3,6 @@ const { knex, cleanDb, setup, teardown, samples } = require("../test/support");
 
 const User = require("./user");
 
-test("(setup)", setup);
-
 test("User.create", async t => {
   await cleanDb();
   const { alice } = samples;
