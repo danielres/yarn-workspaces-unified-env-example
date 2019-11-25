@@ -13,6 +13,7 @@ exports.up = async knex => {
         .defaultTo("member");
       t.timestamp("createdAt").defaultTo(knex.fn.now());
       t.timestamp("updatedAt");
+      t.unique(["tenantId", "userId"]);
     })
     .then(() => knex.schema.raw(onUpdateTrigger("TenantUserRelation")));
 };
