@@ -16,13 +16,14 @@ export default () => {
 
   return (
     <ul>
-      {user.spaces.map(({ name, shortId }) => {
+      {user.spaces.map(({ name, shortId }, i) => {
         const href = `/${shortId}`;
         return (
           <li className={css.item} key={shortId}>
             <Link
               href={href}
               className={useActive(href) ? css.links.active : css.links.normal}
+              data-test-id={`button-space-${i + 1}`}
             >
               {name}
             </Link>

@@ -1,5 +1,5 @@
 import * as React from "react";
 
 export default () => {
-  return <div>PROFILE</div>;
+  return <h1 data-test-id="pagetitle-profile">PROFILE</h1>;
 };

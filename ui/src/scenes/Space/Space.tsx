@@ -42,7 +42,9 @@ export default ({ shortId }) => {
 
   return (
     <div>
-      <h1 className={css.title}>{space.name}</h1>
+      <h1 className={css.title} data-test-id="pagetitle-space">
+        {space.name}
+      </h1>
       <p className={css.p} title={space.owner.email}>
         owner: {space.owner.name} | created: {formatDate(space.createdAt)} |
         joined: {formatDate(space.joinedAt)}

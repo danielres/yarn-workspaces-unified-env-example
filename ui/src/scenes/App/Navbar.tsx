@@ -35,6 +35,7 @@ export default () => {
           <React.Fragment>
             <button
               className={css.button}
+              data-test-id="button-sidemenu-spaces"
               onClick={() => toggleSideMenu("spaces")}
             >
               <FaCog className={css.icon} />
@@ -43,6 +44,7 @@ export default () => {
             <button
               className={css.button}
               onClick={() => toggleSideMenu("user")}
+              data-test-id="button-sidemenu-user"
             >
               <Avatar className={css.right.item} user={user} />
             </button>

@@ -33,7 +33,11 @@ export default () => {
         <h2 className={css.title}>{user.email}</h2>
 
         <div className={css.links.outer}>
-          <Link className={css.links.item} href="/profile">
+          <Link
+            className={css.links.item}
+            data-test-id="button-profile"
+            href="/profile"
+          >
             Profile
           </Link>
         </div>

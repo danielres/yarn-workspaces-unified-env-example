@@ -10,7 +10,7 @@ const css = {
   }
 };
 
-export default ({ message = "" }) => {
+export default () => {
   const { loginWithRedirect } = useAuth();
 
   const onSubmit = () => {
@@ -21,7 +21,11 @@ export default ({ message = "" }) => {
     <div className={css.outer}>
       <form onSubmit={onSubmit}>
         <div className={`${css.row} text-center`}>
-          <button className={css.buttons.primary} type="submit">
+          <button
+            className={css.buttons.primary}
+            data-test-id="button-login"
+            type="submit"
+          >
             Log in
           </button>
         </div>
