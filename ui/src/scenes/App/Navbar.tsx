@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FaCog } from "react-icons/fa";
 import { Link } from "react-navi";
-import { useAppState, useAuth } from "../../services";
+import { useAppState } from "../../services";
 
 const css = {
   outer: `py-2 bg-blue-700 text-white`,
@@ -17,7 +17,7 @@ const css = {
 };
 
 export default () => {
-  const { user, logout } = useAuth();
+  const { user } = useAppState();
   const { toggleSideMenu } = useAppState();
 
   return (
@@ -54,7 +54,6 @@ export default () => {
 };
 
 function Avatar({ className, user }) {
-  if (!user) return null;
   return (
     <div className={className}>
       <img

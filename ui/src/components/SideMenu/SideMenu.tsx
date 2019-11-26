@@ -15,8 +15,8 @@ const css = {
 };
 
 export default () => {
-  const { sideMenuContent } = useAppState();
-  const { user, logout } = useAuth();
+  const { sideMenuContent, user } = useAppState();
+  const { logout } = useAuth();
   const logoutWithRedirect = () => logout({ returnTo: window.location.origin });
 
   if (sideMenuContent === "spaces")

@@ -16,7 +16,7 @@ export default () => {
 
   return (
     <ul>
-      {user.data.user.spaces.map(({ name, shortId }) => {
+      {user.spaces.map(({ name, shortId }) => {
         const href = `/${shortId}`;
         return (
           <li className={css.item} key={shortId}>

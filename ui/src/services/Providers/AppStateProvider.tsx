@@ -11,6 +11,7 @@ const GET_USER = /* GraphQL */ `
       id
       name
       email
+      picture
       spaces {
         id
         shortId
@@ -31,9 +32,9 @@ export default ({ children }) => {
     );
   };
 
-  const [user] = useQuery({ query: GET_USER });
+  const [{ data, fetching }] = useQuery({ query: GET_USER });
 
-  if (user.fetching) return <div>Loading user data...</div>;
+  if (fetching) return <div>Loading user data...</div>;
 
   return (
     <AppStateContext.Provider
@@ -42,7 +43,7 @@ export default ({ children }) => {
         sideMenuContent,
         isSideMenuOpen,
         toggleSideMenu,
-        user
+        user: data.user
       }}
     >
       {children}
