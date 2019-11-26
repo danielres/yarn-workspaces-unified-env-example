@@ -28,7 +28,8 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-s 'test:db:once'"
+      "pre-commit": "run-s 'test:db:once'",
+      "pre-push": "run-s 'test:once'"
     }
   },
   "dependencies": {
