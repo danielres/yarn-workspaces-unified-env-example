@@ -10,6 +10,7 @@ exports.up = async knex => {
         .unique()
         .notNullable();
       t.string("name", 255).notNullable();
+      t.string("picture", 255);
       t.string("email", 255)
         .unique()
         .notNullable();

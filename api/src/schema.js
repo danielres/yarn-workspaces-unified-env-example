@@ -22,6 +22,7 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     name: String!
     email: String!
+    picture: String
     spaces: [Tenant]!
     createdAt: String!
     updatedAt: String
